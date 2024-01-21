@@ -1,29 +1,35 @@
-// require("dotenv").config();
+require("dotenv").config();
+const { error } = require("console");
+const express = require("express");
+const app = express();
+const fs = require("fs");
 
-// const express = require("express");
-// const app = express();
-// const mongoose = require("mongoose");
+app.listen(3000, () => console.log("Server has Started"));
 
-// mongoose.connect(process.env.DATABASE_URL || "mongodb://localhost/contact");
+//getting list of users
+app.get("/getUsers", (req, res) => {
+  fs.readFile(__dirname + "/" + "user.json", "utf8", (err, data) => {
+    console.log(data);
+    res.send(err);
+  });
+});
 
-// const db = mongoose.connection;
+//deleting a user
 
-// db.on("error", (error) => console.error(error));
-// db.once("open", () => console.log("Connected to db"));
+var id = 3;
+app.delete("/deleteUser", (req, res) => {
+  fs.readFile(__dirname + "/" + "user.json" + "utf8", (err, data) => {
+    data = JSON.parse(data);
+    delete data["user" + 3];
 
-// app.listen(3000, () => console.log("Server has Started"));
+    console.log(data);
+    res.send(JSON.stringify(data));
+  });
+});
 
-// app.use(express.json());
-
-// const contactsRouter = require("./routes/contact.js");
-// app.use("/contacts", contactsRouter);
-
-// //for creating user
-// const newUserRouter = require("./routes/createUser.js");
-// app.use("/createUser", newUserRouter);
-
-// const usersRouter = require("./routes/users");
-// app.use("/users", usersRouter);
-
-// const authRouter = require("./routes/auth");
-// app.use("/auth", authRouter);
+//connecting to server to listen to the call
+var server = app.listen(8080, () => {
+  var host = server.address().address;
+  var port = server.address().port;
+  console.log("REST API listening at hhtp://%s:%s", host, port);
+});
