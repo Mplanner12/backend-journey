@@ -1,0 +1,31 @@
+GET http://localhost:3000/post/65ac00d45b75b71270ac31cd
+###
+
+GET http://localhost:3000/post
+
+###
+
+
+DELETE http://localhost:3000/post/65ac00d45b75b71270ac31cd
+
+###
+
+
+PATCH http://localhost:3000/post/65ac00d45b75b71270ac31cd
+Content-Type: application/json
+
+{
+    "title": "Its time for change"
+}
+###
+
+
+
+
+POST http://localhost:3000/post
+Content-Type: application/json
+
+{
+    "title": "Hello there",
+    "description": "finally i learnt mongo db and express js"
+}
